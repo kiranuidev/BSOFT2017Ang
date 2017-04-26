@@ -1,0 +1,64 @@
+<html ng-app="fashionbay">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+
+<body>
+    <div ng-controller="registerCtrl as rc">
+        <form class="form-horizontal">
+            <fieldset>
+                <legend>{{rc.pageTitle}}</legend>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Email</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" placeholder="Email" ng-model="rc.user.email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Password</label>
+                    <div class="col-sm-4">
+                        <input type="password" class="form-control" placeholder="Password" ng-model="rc.user.password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Countries</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" ng-model="rc.user.country" ng-options="country.name for  country in rc.countries"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Gender</label>
+                    <div class="col-sm-4">
+                        <input type="radio" ng-model="rc.user.gender" value="M" name="gender">Male
+                        <input type="radio" ng-model="rc.user.gender" value="F" name="gender">Female
+                        <input type="radio" ng-model="rc.user.gender" value="NA" name="gender">Donot Reveal
+
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <div class="col-sm-4 col-sm-offset-3">
+                        <input type="checkbox" ng-model="rc.user.agree">I Agree Terms and conditions.
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <div class="col-sm-4 col-sm-offset-4">
+                        <button class="btn btn-primary" ng-click="rc.registerUser()">Register</button>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+        <h1>{{rc.user}}</h1>
+    </div>
+
+
+    <script src="app/register/register.js"></script>
+    <script src="app/register/registerCtrl.js"></script>
+    <script src="app/app.js"></script>
+</body>
+
+</html>
