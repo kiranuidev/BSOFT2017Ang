@@ -1,16 +1,15 @@
 (function() {
-    function registerCtrl() {
+    function registerCtrl(utilitySvc) {
         var vm = this;
         vm.pageTitle = "Register";
         vm.user = {};
-        // vm.genders =[{name:"Male",value:"M"}]
         vm.registerUser = function() {
+            vm.isSubmitted = true;
             console.log(vm.user);
         };
-        vm.countries = [{ name: "India", code: "IN" },
-            { name: "United States", code: "USA" }
-        ];
+        vm.countries = utilitySvc.getCountries();
+        vm.patterns = utilitySvc.validationPatterns;
     }
     angular.module("register")
-        .controller("registerCtrl", [registerCtrl]);
+        .controller("registerCtrl", ["utilityService", registerCtrl]);
 })();

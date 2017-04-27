@@ -1,4 +1,4 @@
 (function() {
     //creating a module.
-    angular.module("fashionbay", ["register"]);
+    angular.module("fashionbay", ["register", "utils"]);
 })();
