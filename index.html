@@ -3,68 +3,21 @@
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.js"></script>
 </head>
 
 <body>
-    <div ng-controller="registerCtrl as rc">
-        <form class="form-horizontal" name="register" novalidate>
-            <fieldset>
-                <legend>{{rc.pageTitle}}</legend>
-                <div class="form-group" ng-class="{ 'has-error' : register.email.$invalid && !register.email.$pristine }">
-                    <label class="col-sm-3 control-label">Email</label>
-                    <div class="col-sm-4">
-                        <input type="text" ng-required="true" ng-minlength="10" ng-maxlength="20" ng-pattern="rc.patterns.email" class="form-control" placeholder="Email" name="email" ng-model="rc.user.email">
-                        <!--<div ng-if="rc.isSubmitted">-->
-                        <p ng-if="register.email.$error.required" class="help-block">Email is required</p>
-                        <p ng-if="register.email.$error.minlength" class="help-block">Email minimum length is 10</p>
-                        <p ng-if="register.email.$error.maxlength" class="help-block">Email maximum length is 20</p>
-                        <p ng-if="register.email.$error.pattern" class="help-block">Invalid email pattern</p>
-                        <!--</div>-->
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">Password</label>
-                    <div class="col-sm-4">
-                        <input type="password" class="form-control" placeholder="Password" ng-model="rc.user.password">
-
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">Countries</label>
-                    <div class="col-sm-4">
-                        <select class="form-control" ng-model="rc.user.country" ng-options="country.name+' - '+country.code for  country in rc.countries"></select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">Gender</label>
-                    <div class="col-sm-4">
-                        <input type="radio" ng-model="rc.user.gender" value="M" name="gender">Male
-                        <input type="radio" ng-model="rc.user.gender" value="F" name="gender">Female
-                        <input type="radio" ng-model="rc.user.gender" value="NA" name="gender">Donot Reveal
-
-                    </div>
-                </div>
-                <div class="form-group">
-
-                    <div class="col-sm-4 col-sm-offset-3">
-                        <input type="checkbox" ng-model="rc.user.agree">I Agree Terms and conditions.
-                    </div>
-                </div>
-                <div class="form-group">
-
-                    <div class="col-sm-4 col-sm-offset-4">
-                        <button class="btn btn-primary" ng-disabled="register.$invalid" ng-click="rc.registerUser()">Register</button>
-                    </div>
-                </div>
-
-            </fieldset>
-        </form>
-        <h1>{{rc.user}}</h1>
+    <div class="container" ng-controller="mainCtrl as mc">
+        <div ng-include="mc.headerTemplate">
+        </div>
     </div>
-
+    <div class="container">
+        <div ui-view></div>
+    </div>
     <script src="app/utils/utils.js"></script>
     <script src="app/register/register.js"></script>
     <script src="app/register/registerCtrl.js"></script>
+    <script src="app/products/products.js"></script>
     <script src="app/app.js"></script>
 </body>
 

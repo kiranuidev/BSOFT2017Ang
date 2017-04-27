@@ -1,0 +1,19 @@
+<h1>Products</h1>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Model</th>
+            <th>Price</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="product in pc.products">
+            <td ng-bind="product.index"></td>
+            <td ng-bind="product.Model"></td>
+            <td ng-bind="product.Price"></td>
+            <td ng-bind="product.Description"></td>
+        </tr>
+    </tbody>
+</table>

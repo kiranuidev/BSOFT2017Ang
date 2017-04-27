@@ -1,6 +1,10 @@
 (function() {
     angular.module("utils", []);
 
+    function mainCtrl() {
+        var vm = this;
+        vm.headerTemplate = 'app/utils/navbar.tpl.html';
+    }
 
     function utilityService($http, $q) {
         this.validationPatterns = {
@@ -51,5 +55,6 @@
     angular.module("utils")
         .service("utilityService", ["$http", "$q",
             utilityService
-        ]);
+        ])
+        .controller("mainCtrl", [mainCtrl]);
 })();
