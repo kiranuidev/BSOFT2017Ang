@@ -1,9 +1,13 @@
 (function() {
     angular.module("utils", []);
 
-    function mainCtrl() {
+    function mainCtrl($rootScope) {
         var vm = this;
+        vm.cartItemsCount = 0;
         vm.headerTemplate = 'app/utils/navbar.tpl.html';
+        $rootScope.$on("ITEM-ADDED", function(evt, args) {
+            vm.cartItemsCount++;
+        });
     }
 
     function utilityService($http, $q) {
@@ -56,5 +60,5 @@
         .service("utilityService", ["$http", "$q",
             utilityService
         ])
-        .controller("mainCtrl", [mainCtrl]);
+        .controller("mainCtrl", ["$rootScope", mainCtrl]);
 })();

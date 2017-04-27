@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" ng-controller="mainCtrl as mc">
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -24,7 +24,8 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#">Link</a>
+                        <a class="btn btn-primary btn-lg" ui-sref="cart">
+                            <span class="glyphicon glyphicon-shopping-cart"></span>Cart {{mc.cartItemsCount}}</a>
                     </li>
                 </ul>
             </div>

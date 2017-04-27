@@ -1,9 +1,17 @@
 (function() {
     angular.module("products", [])
         .service("productSvc", ["$http", "$q", productSvc])
-        .controller("productCtrl", ["productSvc", productCtrl]);
+        .controller("productCtrl", ["$rootScope", "productSvc", productCtrl]);
 
     function productSvc($http, $q) {
+        var cartItems = [];
+
+        this.addToCart = function(item) {
+            cartItems.push(item);
+        };
+        this.getCartItems = function() {
+            return cartItems;
+        };
         this.getProducts = function() {
             var dfd = $q.defer();
             $http.get("api/products.json")
@@ -49,7 +57,7 @@
         };
     }
 
-    function productCtrl(productSvc) {
+    function productCtrl($rootScope, productSvc) {
         var vm = this;
         vm.sort = {
             model: "Model"
@@ -69,6 +77,19 @@
                 });
 
         };
+
+        vm.selectProduct = function(item) {
+            productSvc.addToCart(item);
+            $rootScope.$broadcast("ITEM-ADDED");
+        };
+
+
+        function init() {
+            vm.CartProducts = productSvc.getCartItems();
+        }
+
+
+        init();
 
     }
 })();
