@@ -1,19 +1,31 @@
 <h1>Products</h1>
+<div class="row">
+    <div class="col-sm-4">
+        <input class="form-control" ng-model="pc.search" type="text">
+    </div>
+    <div class="col-sm-2">
+        <button class="btn btn-primary" ng-click="pc.searchProducts()">Search</button>
+    </div>
+</div>
 <table class="table table-striped table-hover">
     <thead>
         <tr>
             <th>#</th>
-            <th>Model</th>
+            <th ng-click="pc.orderByModel()">
+                <a href="">Model</a>
+            </th>
             <th>Price</th>
             <th>Description</th>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="product in pc.products">
+        <tr ng-repeat="product in pc.products|filter:pc.search">
+            <!--<tr ng-repeat="product in pc.products|orderBy:pc.sort.model">-->
             <td ng-bind="product.index"></td>
-            <td ng-bind="product.Model"></td>
-            <td ng-bind="product.Price"></td>
-            <td ng-bind="product.Description"></td>
+            <td ng-bind="product.Model|limitTo:10"></td>
+            <td ng-bind="product.Price|currency:'$.'"></td>
+            <td ng-bind="product.Description|limitTo:20"></td>
         </tr>
     </tbody>
 </table>
+</input>
