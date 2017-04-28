@@ -3,6 +3,10 @@
         var vm = this;
         vm.pageTitle = "Register";
         vm.user = {};
+
+        vm.dobConfig = {
+            maxDate: 0
+        };
         vm.registerUser = function() {
             vm.isSubmitted = true;
             console.log(vm.user);
