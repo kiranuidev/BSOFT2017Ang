@@ -87,10 +87,64 @@
         }
     }
 
+    function bsNavBar() {
+        return {
+            templateUrl: 'app/utils/sidenav.tpl.html',
+            scope: {
+                sideNavItems: "=",
+                heading: "@",
+                loadPage: "&"
+            },
+            controller: function($scope) {
+                console.log($scope);
+            },
+            link: function(scope, element, attrs) {
+                console.log(scope);
+                scope.sideNavItems.push("FromDir");
+                scope.heading = scope.heading + " Extra";
+            }
+        }
+    }
+
+    function bsTryMe() {
+        return {
+            template: '<h1>I am good </h1><div ng-transclude></div>',
+            transclude: true
+        }
+    }
+    //building validation directive
+    function bsCheckUser() {
+        return {
+            require: "ngModel",
+            link: function(scope, element, attrs, ctrl) {
+                ctrl.$formatters.unshift(checkUser);
+                ctrl.$parsers.unshift(checkUser);
+                var users = ["kiran", "Ravi", "john"]
+
+                function checkUser(data) {
+                    console.log(data);
+                    var isUserExists = false;
+                    angular.forEach(users, function(item) {
+                        if (!isUserExists) {
+                            isUserExists = item == data;
+                        }
+                    });
+                    ctrl.$setValidity("checkuser", !isUserExists);
+
+                }
+
+            }
+        }
+    }
+
+
     angular.module('utils')
         .directive('bsBrandName', [bsBrandName])
         .directive("alphabetsOnly", [alphabetsOnly])
         .directive("numbersOnly", [numbersOnly])
         .directive("hybrid", [hybrid])
         .directive("bsDatePicker", [bsDatePicker])
+        .directive("bsNavBar", [bsNavBar])
+        .directive("bsTryMe", [bsTryMe])
+        .directive("bsCheckUser", [bsCheckUser])
 })();

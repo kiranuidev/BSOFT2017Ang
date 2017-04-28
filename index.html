@@ -2,23 +2,37 @@
 
 <head>
     <base href="/">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate/2.15.1/angular-translate.js"></script>
 </head>
 
 <body>
     <div class="container" ng-controller="mainCtrl as mc">
         <div ng-include="mc.headerTemplate">
         </div>
-    </div>
-    <div class="container">
-        <div ui-view></div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <bs-nav-bar side-nav-items="mc.navItems" heading="{{mc.parentHeading}}" load-page="mc.handleSideNavClick()"></bs-nav-bar>
+            </div>
+            <div class="col-md-10">
+                <bs-try-me>
+                    <h1>Hey i Am also here</h1>
+                </bs-try-me>
+                <div ui-view></div>
+            </div>
+        </div>
+        <label>United States:  {{"1234567890"|phoneformat:"US"}}</label>
+        <label>India:  {{"1234567890"|phoneformat:"IN"}}</label>
+
     </div>
     <script src="app/utils/utils.js"></script>
+    <script src='app/utils/filters.js'></script>
     <script src="app/utils/directives.js"></script>
     <script src="app/register/register.js"></script>
     <script src="app/register/registerCtrl.js"></script>

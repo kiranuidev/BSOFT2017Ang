@@ -1,12 +1,15 @@
 (function() {
     //creating a module.
     angular.module("fashionbay", ["register",
-        "utils", "products", "ui.router"
+        "utils", "products", "ui.router", 'pascalprecht.translate'
     ]);
 
-    function config($stateProvider, $urlRouterProvider, $locationProvider) {
+    function config($stateProvider, $urlRouterProvider,
+        $locationProvider, $translateProvider, versionProvider) {
+        console.log(versionProvider.$get());
+        versionProvider.setVersion("2.0.0");
         $urlRouterProvider.otherwise("/home");
-        $locationProvider.html5Mode(true);
+        //$locationProvider.html5Mode(true);
         //defining the states.
         var registerObj = {
             name: "register",
@@ -17,7 +20,6 @@
         //map object to the state.
 
         var homeObj = {
-            name: "home",
             url: "/home",
             templateUrl: "app/home/home.tpl.html"
         };
@@ -41,8 +43,42 @@
             controller: "productCtrl as pc"
         };
         $stateProvider.state("cart", cartObj);
+        //locaalizaiton
+        var english = {
+            "Home": "Home",
+            "Register": "Register",
+            "Products": "Products",
+            "Cart": "Cart"
+        };
+        var deutsch = {
+            "Home": "Zuhause",
+            "Register": "Neu registrieren",
+            "Products": "Produkte",
+            "Cart": "Karte"
+        };
+
+        $translateProvider.translations('en', english);
+        $translateProvider.translations('de', deutsch);
+        $translateProvider.preferredLanguage('de');
+
+    }
+
+    function version() {
+        var appVersion = "1.0.0";
+        this.setVersion = function(data) {
+            appVersion = data;
+        }
+        this.$get = function() {
+            return appVersion;
+        }
     }
     angular.module("fashionbay")
-        .config(["$stateProvider", "$urlRouterProvider", "$locationProvider", config]);
+        .provider("version", [version]);
+
+    angular.module("fashionbay")
+        .config(["$stateProvider", "$urlRouterProvider", "$locationProvider", "$translateProvider", "versionProvider", config]);
+
+
+
 
 })();

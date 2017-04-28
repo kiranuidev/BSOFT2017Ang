@@ -1,13 +1,30 @@
 (function() {
     angular.module("utils", []);
 
-    function mainCtrl($rootScope) {
+    function mainCtrl($rootScope, $scope, version, $translate) {
         var vm = this;
-        vm.cartItemsCount = 0;
+        console.log(version);
+        vm.navItems = ["Home", "Profile", "XYZ"];
+        vm.handleSideNavClick = function() {
+            console.log(vm.navItems);
+            console.log(vm.parentHeading);
+        };
+        vm.parentHeading = "Awesome";
+        setTimeout(function() {
+            vm.parentHeading = "Hey I changed";
+            $scope.$apply();
+        }, 5000);
+
+
         vm.headerTemplate = 'app/utils/navbar.tpl.html';
         $rootScope.$on("ITEM-ADDED", function(evt, args) {
             vm.cartItemsCount++;
         });
+        vm.cartItemsCount = 0;
+        vm.changeLanguage = function(key) {
+            $translate.use(key);
+        };
+
     }
 
     function utilityService($http, $q) {
@@ -55,10 +72,12 @@
             }
             return dfd.promise;
         };
+
+
     }
     angular.module("utils")
         .service("utilityService", ["$http", "$q",
             utilityService
         ])
-        .controller("mainCtrl", ["$rootScope", mainCtrl]);
+        .controller("mainCtrl", ["$rootScope", "$scope", "version", "$translate", mainCtrl]);
 })();
